@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Lista departamentos
+{% endblock title %}
+
+{% block content %}
+{% include 'includes/header.html' %}
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell">Departamentos</h1>
+        <table>
+            <tbody>
+                {%for departamento in departamentos%}
+                <tr>
+                    <td>{{departamento.name}}</td>
+                    <td>{{departamento.short_name}}</td>
+                    <td><a class="button warning" href="{% url 'persona_app:employees_by_area' shortname=departamento.short_name %}">Ver Empleados</a>
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        <!-- <div class="cell">
+            {% if is_paginated %}
+            <nav aria-label="Pagination">
+                <ul class="pagination text-center">
+                    {% if page_obj.has_previous %}
+                    <li class="pagination-previous"><a href="?page={{ page_obj.previous_page_number }}"
+                            aria-label="Previous page">Previous</a>
+                    </li>
+                    {% endif %}
+
+                    {% for page in paginator.page_range %}
+
+                    {% if page == page_obj.number %}
+                    <li class="current"><span class="show-for-sr">You're on page</span><a href="?page={{ page }}"
+                            aria-label="Page {{ page }}">{{ page }}</a></li>
+                    {% else %}
+                    <li><a href="?page={{ page }}" aria-label="Page {{ page }}">{{ page }}</a></li>
+                    {% endif %}
+
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="pagination-next"><a href="?page={{ page_obj.next_page_number }}"
+                            aria-label="Next page">Next</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div> -->
+    </div>
+</div>
+{% endblock content %}
